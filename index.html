@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Expense Tracker</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1><i class="fas fa-wallet"></i> Expense Tracker</h1>
+            <div class="header-actions">
+                <button id="setIncomeBtn">Set Income</button>
+                <button id="resetDataBtn">Reset All</button>
+            </div>
+        </header>
+
+        <div class="dashboard">
+            <div class="card">
+                <h2>Financial Summary</h2>
+                <div class="amount" id="totalBalance">$0.00</div>
+                <div class="stats">
+                    <div class="stat"><span>Income</span><span class="positive" id="totalIncome">$0.00</span></div>
+                    <div class="stat"><span>Expenses</span><span class="negative" id="totalExpenses">$0.00</span></div>
+                    <div class="stat"><span>Budget Left</span><span id="budgetLeft">$0.00</span></div>
+                </div>
+            </div>
+
+            <div class="card">
+                <h2>Monthly Budget</h2>
+                <div class="budget-display">
+                    <span>$<span id="monthlyBudget">0</span></span>
+                    <button id="setBudgetBtn"><i class="fas fa-edit"></i></button>
+                </div>
+                <div class="progress-bar"><div class="progress-fill" id="budgetProgress"></div></div>
+                <div class="budget-info">
+                    <span id="budgetPercent">0%</span>
+                    <span>Used: $<span id="budgetUsed">0</span></span>
+                </div>
+            </div>
+        </div>
+
+        <div class="main-content">
+            <div class="card">
+                <h2>Add Transaction</h2>
+                <form id="expenseForm">
+                    <input type="text" id="description" placeholder="Description" required>
+                    <input type="number" id="amount" placeholder="Amount" step="0.01" required>
+                    <select id="category" required>
+                        <option value="">Category</option>
+                        <option value="food">Food</option><option value="transport">Transport</option>
+                        <option value="shopping">Shopping</option><option value="bills">Bills</option>
+                        <option value="entertainment">Entertainment</option>
+                    </select>
+                    <input type="date" id="date" required>
+                    <div class="radio-group">
+                        <label><input type="radio" name="type" value="expense" checked> Expense</label>
+                        <label><input type="radio" name="type" value="income"> Income</label>
+                    </div>
+                    <button type="submit"><i class="fas fa-plus"></i> Add</button>
+                </form>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <h2>Transactions</h2>
+                    <select id="filterCategory">
+                        <option value="all">All</option><option value="food">Food</option>
+                        <option value="transport">Transport</option><option value="shopping">Shopping</option>
+                        <option value="bills">Bills</option><option value="entertainment">Entertainment</option>
+                    </select>
+                </div>
+                <div class="transactions-list" id="transactionsList">
+                    <div class="empty-state"><i class="fas fa-receipt"></i><p>No transactions</p></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="alert-modal" id="budgetAlertModal">
+        <div class="alert-content">
+            <div class="alert-icon">⚠️</div>
+            <h3>Budget Alert!</h3>
+            <p id="alertMessage">Budget exceeded!</p>
+            <button class="alert-close" id="closeAlert">OK</button>
+        </div>
+    </div>
+
+    <div class="expense-alert-modal" id="expenseAlertModal">
+        <div class="expense-alert-content">
+            <div class="expense-alert-icon">🚨</div>
+            <h3>Expense Too High!</h3>
+            <p id="expenseAlertMessage">Exceeds budget!</p>
+            <button class="expense-alert-close" id="closeExpenseAlert">Continue</button>
+        </div>
+    </div>
+
+    <div class="modal" id="incomeModal">
+        <div class="modal-content">
+            <h3>Set Income</h3>
+            <input type="number" id="incomeAmount" placeholder="Monthly income" step="0.01">
+            <div class="modal-actions">
+                <button id="closeIncomeModal">Cancel</button>
+                <button id="saveIncome">Save</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal" id="budgetModal">
+        <div class="modal-content">
+            <h3>Set Budget</h3>
+            <input type="number" id="budgetAmount" placeholder="Monthly budget" step="0.01">
+            <div class="modal-actions">
+                <button id="closeBudgetModal">Cancel</button>
+                <button id="saveBudget">Save</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
